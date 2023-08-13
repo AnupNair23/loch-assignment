@@ -1,26 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import "./index.scss";
+import Signup from "pages/Signup";
+import Loading from "pages/components/Loading";
+
+let router = createBrowserRouter([
+  {
+    path: "/",
+    loader: () => ({ message: "Hello Data Router!" }),
+    Component: () => <Signup />,
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} fallbackElement={<Loading />} />;
 }
 
-export default App;
+// if (import.meta.hot) {
+//   import.meta.hot.dispose(() => router.dispose());
+// }
